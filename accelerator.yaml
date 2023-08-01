@@ -59,7 +59,7 @@ accelerator:
       defaultValue: gpt35
       choices:
         - text: "gpt-3.5"
-          value: gtp35
+          value: gpt35
         - text: gpt-2
           value: gpt2
         - text: gpt-2-large
