@@ -83,7 +83,7 @@ accelerator:
         - text: Pinecone
           value: pinecone
         - text: Greenplum
-          value: greeplum
+          value: greenplum
         - text: Pgvector / Postgres
           value: pgvector
         - text: Langchain vector store
