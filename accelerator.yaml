@@ -58,6 +58,8 @@ accelerator:
       required: true
       defaultValue: "gpt-3.5"
       choices:
+        - text: "gpt-3.5"
+          value: gtp35
         - text: gpt-2
           value: gpt2
         - text: gpt-2-large
