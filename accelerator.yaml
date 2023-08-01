@@ -56,7 +56,7 @@ accelerator:
       dataType: string
       display: true
       required: true
-      defaultValue: "gpt-3.5"
+      defaultValue: gpt35
       choices:
         - text: "gpt-3.5"
           value: gtp35
