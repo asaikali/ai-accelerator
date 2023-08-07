@@ -8,4 +8,4 @@ spec:
     url:  https://github.com/asaikali/ai-accelerator.git
     interval: 10s
     ref:
-      branch: main
+      branch: springone
