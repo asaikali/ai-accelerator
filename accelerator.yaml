@@ -41,7 +41,7 @@ accelerator:
       label: Vector Database
       inputType: checkbox
       display: false
-      dataType: string
+      dataType: boolean
       defaultValue: false
       choices:
         - text: Vector Database

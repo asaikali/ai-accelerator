@@ -1,7 +1,7 @@
 # Spring AI Accelerator
 
-This accelerator creates a starter spring application configured to talk ot 
-a large language model, using the spring-ai library. The starter application
+This accelerator creates a starter spring application that uses the spring-ai 
+library to communicate with Large Language Model (LLM). The generated code 
 demonstrates best practices for working with AI services in a Spring Boot 
 application.
 
@@ -33,12 +33,15 @@ az spring application-accelerator customized-accelerator create \
   --resource-group ${ASA_SERVICE_RG} \
   --service ${ASA_SERVICE_NAME} \
   --name spring-ai-accelerator \
-  --display-name "Spring AI App" \
+  --display-name "Spring AI (Experimental)" \
   --git-branch springone \
   --git-interval 10 \
   --git-url  https://github.com/asaikali/ai-accelerator.git
 ```
 
+#
+# 
+#
 
 
 
