@@ -47,3 +47,133 @@ accelerator:
         - text: Vector Database
           value: pgVector
 
+engine:
+  merge:
+    #
+    # include all files except the ones that we might not need
+    #
+    - include: [ "**/**" ]
+      exclude: [ "infra/**", "**/*.java", "ytt/**", "app-readme.md", "settings-template.sh", "snippets/**" ]
+
+    #
+    # Refactor the package name of the generated java code to
+    # package name entered by the user using OpenRewrite Engine
+    #
+    - include: [ "**/*.java" ]
+      chain:
+        - type: OpenRewriteRecipe
+          recipe: org.openrewrite.java.ChangePackage
+          options:
+            oldPackageName: "'com.example'"
+            newPackageName: "#packageName"
+
+    #
+    # Generate the spring boot application.yaml using carvel YTT tool
+    #
+    - include: [ "src/main/resources/application.yaml", "ytt/add-vault.yaml" ]
+      chain:
+        - type: YTT
+
+    #
+    # transform the pom.xml based on the input values
+    #  - set the artifact id
+    #  - set the java version
+    #  - configure maven dependencies
+    #
+    - include: [ "pom.xml" ]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: Spring-Boot-REST-API-Accelerator
+              with: "#artifactId"
+        - type: ReplaceText
+          condition: "#javaVersion == '17'"
+          substitutions:
+            - text: <java.version>11</java.version>
+              with: "'<java.version>17</java.version>'"
+        - type: OpenRewriteRecipe
+          recipe: org.openrewrite.maven.RemoveDependency
+          condition: "#postgresDB == false"
+          options:
+            groupId: "'org.postgresql'"
+            artifactId: "'postgresql'"
+            scope: "'runtime'"
+        - type: OpenRewriteRecipe
+          recipe: org.openrewrite.maven.ChangeDependencyScope
+          condition: "#postgresDB == false"
+          options:
+            groupId: "'com.h2database'"
+            artifactId: "'h2'"
+            newScope: "'runtime'"
+
+    #
+    # Configure KeyVault ARM template
+    #
+    - include: [ "infra/azure/KeyVault/**" ]
+      exclude: [ "infra/azure/KeyVault/parameters.json" ]
+    - include: [ "infra/azure/KeyVault/parameters.json" ]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: REPLACE-WITH-VAULT-NAME
+              with: "#keyVaultName"
+
+    #
+    # configure local development with Postgres
+    # using docker compose
+    #
+    - include: [ "infra/local/**" ]
+      condition: "#postgresDB == true"
+
+    #
+    # configure ARM template for Postgres development on Azure
+    #
+    - include: ["infra/azure/Postgres/**"]
+      exclude: [ "infra/azure/Postgres/parameters.json"]
+      condition: "#postgresDB == true"
+
+    - include: [ "infra/azure/Postgres/parameters.json" ]
+      condition: "#postgresDB == true"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: SERVER-NAME
+              with: "#postgresServerName"
+        - type: ReplaceText
+          substitutions:
+            - text: VAULT-NAME
+              with: "#keyVaultName"
+
+    #
+    # transform the readme to provide custom instructions on
+    # how to use the generated project based on user choices.
+    #
+    - include: [ "app-readme.md", "snippets/**" ]
+      chain:
+        - type: RewritePath
+          regex: snippets/app-readme(.*)
+          rewriteTo: "'README' + #g1"
+        - type: ReplaceText
+          substitutions:
+            - text: PROJECT-TITLE
+              with: "#artifactId"
+            - text: JAVA-VERSION
+              with: "#javaVersion"
+            - text: REPLACE-WITH-APP-NAME
+              with: "#artifactId"
+            - text: REPLACE-WITH-VAULT-NAME
+              with: "#keyVaultName"
+        - type: ReplaceText
+          condition: "#postgresDB == true"
+          substitutions:
+            - text: LOCAL-DB-USAGE
+              with: "#files.contentsOf('snippets/local-db.md')"
+            - text: AZURE-DB-USAGE
+              with: "#files.contentsOf('snippets/azure-db.md')"
+        - type: ReplaceText
+          condition: "#postgresDB == false"
+          substitutions:
+            - text: LOCAL-DB-USAGE
+              with:  "''"
+            - text: AZURE-DB-USAGE
+              with: "''"
