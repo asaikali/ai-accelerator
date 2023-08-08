@@ -1,141 +1,49 @@
 accelerator:
-  displayName: Large Language Model
-  description: This is a model that can be used to generate an end-to-end LLM applicaiton 
+  displayName: Spring AI Accelerator
+  description: Quickly get started building Spring Apps that interact with Large Language Models
   iconUrl: https://raw.githubusercontent.com/asaikali/ai-accelerator/main/logo.png
   tags:
     - LLM 
     - AI
+    - Spring
   options:
 
     #
-    # Use case
-    # 
-    - name: useCase
-      label: "What will this AI model be used for?"
-      inputType: select
-      dataType: string
-      display: true
-      required: true
-      defaultValue: "qa"
-      choices:
-        - text: Automatic Speech Recognition
-          value: "asr"
-        - text: Image Classificaton 
-          value: "ic"
-        - text: Token Classification 
-          value: "tc"
-        - text: Summarization
-          value: "sm"
-        - text: Questing Anwsering
-          value: "qa"
-      
+    # UI option to get the package name for the generated java code
     #
-    # Model Catalog 
-    # 
-    - name: modelCatalog
-      label: "What is the source Model Catalog?"
-      inputType: select
+    - name: packageName
       dataType: string
-      display: true
       required: true
-      defaultValue: "hg"
-      choices:
-        - text: Huggingface hub
-          value: "hg"
-        - text: VMware Applicaiton Catalog
-          value: "vac"
-        - text: "OpenAI hub"
-          value: "oai"
-    
-    #
-    # LLM model
-    # 
-    - name: llmModel
-      label: "LLM Model?"
-      inputType: select
-      dataType: string
-      display: true
-      required: true
-      defaultValue: gpt35
-      choices:
-        - text: "gpt-3.5"
-          value: gpt35
-        - text: gpt-2
-          value: gpt2
-        - text: gpt-2-large
-          value: gpt2Large
-        - text: gpt-xl
-          value: gptKL
-        - text: open-llama-7b-v2-open-instruct
-          value: openLlama7bv2OpenInstruct
+      defaultValue: "com.acme"
+      label: Package name
+      description: Name of the package to put generated code under
 
     #
-    # Vector Database
+    # LLM API to use
     # 
-    - name: vectorDB
-      label: "Vector Database"
+    - name: aiService
+      label: "AI Service"
       inputType: select
       dataType: string
       display: true
       required: true
-      defaultValue: "greenplum"
+      defaultValue: "azureOpenAI"
       choices:
-        - text: Pinecone
-          value: pinecone
-        - text: Greenplum
-          value: greenplum
-        - text: Pgvector / Postgres
-          value: pgvector
-        - text: Langchain vector store
-          value: langchainVectorStore
+        - text: Azure AI
+          value: "azureOpenAI"
+        - text: Open AI (Chat-GPT)
+          value: "openAI"
 
-    #
-    # Cache Service
-    # 
-    - name: cacheService
-      label: "Cache Service"
-      inputType: select
-      dataType: string
-      display: true
-      required: true
-      defaultValue: "gemfire"
-      choices:
-        - text: VMware Gemfire
-          value: gemfire
-        - text: Polyscale
-          value: polyscale
-        - text: Redis
-          value: redis
-
-    #
-    # inference sever
-    # 
-  
-    - name: inferenceServer
-      label: "Inference server"
-      inputType: select
-      dataType: string
-      display: true
-      required: true
-      defaultValue: "trident"
-      choices:
-        - text: NVIDIA Triton Inferece Server
-          value: trident
-        
     #
     # Library
     #
-    - name: library
-      label: Library
+    - name: vectorDB
+      label: Vector Database
       inputType: checkbox
-      display: true
-      dataType: [string]
-      defaultValue: []
+      display: false
+      dataType: string
+      defaultValue: false
       choices:
-        - text: Langchain (Java)
-          value: langchainJava
-        - text: Langchain (Python)
-          value: langchainPython
-        - text: LlamaIndex (Python)
-          value: lambdaIndexPython
-          
+        - text: Vector Database
+          value: pgVector
+
