@@ -22,7 +22,7 @@ accelerator:
     # Use case
     # 
     - name: useCase
-      label: "What type of AI capabilites are looking to implement?"
+      label: "What type of AI capability are looking to implement?"
       inputType: select
       dataType: string
       display: true
