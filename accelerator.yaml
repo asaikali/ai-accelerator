@@ -51,23 +51,11 @@ accelerator:
       required: true
       defaultValue: "azureOpenAI"
       choices:
-        - text: Azure AI
+        - text: Azure OpenAI Service
           value: "azureOpenAI"
-        - text: Open AI (Chat-GPT)
+        - text: Open AI
           value: "openAI"
 
-    #
-    # Library
-    #
-#    - name: vectorDB
-#      label: Vector Database
-#      inputType: checkbox
-#      display: false
-#      dataType: boolean
-#      defaultValue: false
-#      choices:
-#        - text: Vector Database
-#          value: pgVector
 
 engine:
   merge:
@@ -75,4 +63,30 @@ engine:
     # include all files except the ones that we might not need
     #
     - include: [ "**/**" ]
+      exclude: [ "snippets/**" ]
 
+    #
+    # Refactor the package name of the generated java code to
+    # package name entered by the user using OpenRewrite Engine
+    #
+    - include: [ "**/*.java" ]
+      chain:
+        - type: OpenRewriteRecipe
+          recipe: org.openrewrite.java.ChangePackage
+          options:
+            oldPackageName: "'com.example'"
+            newPackageName: "#packageName"
+
+    #
+    # transform the readme to provide custom instructions on
+    # how to use the generated project based on user choices.
+    #
+    - include: [ "app-readme.md", "snippets/**" ]
+      chain:
+        - type: RewritePath
+          regex: snippets/app-readme(.*)
+          rewriteTo: "'README' + #g1"
+        - type: ReplaceText
+          substitutions:
+            - text: PROJECT-TITLE
+              with: "#artifactId"
