@@ -20,7 +20,7 @@ without having to train it on private data.
 
 ### High level architecture 
 
-![High level architecture](https://github.com/asaikali/ai-accelerator/blob/springone/RAG-architecture.png)
+![High level architecture](https://raw.githubusercontent.com/asaikali/ai-accelerator/springone/RAG-architecture.png)
 
 # Deploying to Azure Spring Apps
 
