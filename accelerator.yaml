@@ -63,7 +63,7 @@ engine:
     # include all files except the ones that we might not need
     #
     - include: [ "**/**" ]
-      exclude: [ "snippets/**" ]
+      exclude: [ "snippets/**", "app-readme.md" ]
 
     #
     # Refactor the package name of the generated java code to
