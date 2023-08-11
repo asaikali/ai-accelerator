@@ -84,7 +84,7 @@ engine:
     - include: [ "app-readme.md"]
       chain:
         - type: RewritePath
-          regex: /app-readme(.*)
+          regex: app-readme(.*)
           rewriteTo: "'README' + #g1"
         - type: ReplaceText
           substitutions:
