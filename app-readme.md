@@ -18,8 +18,6 @@ Training or fine tuning an LLM  on existing data is expensive, time
 consuming. RAG is a technique that allows you to use an existing LLM 
 without having to train it on private data.
 
-### High level architecture 
-
 ![High level architecture](https://raw.githubusercontent.com/asaikali/ai-accelerator/springone/RAG-architecture.png)
 
 # Deploying to Azure Spring Apps
