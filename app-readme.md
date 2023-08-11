@@ -2,10 +2,10 @@
 
 This project contains a Spring Boot Application that can 
 answers question over a document library using a vector index
-and a Large Language Model (LLM). If you are new to AI and LLMs
+and a Large Language Model (LLM). **If you are new to AI and LLMs
 then be sure to checkout the AI Resources section below, it 
 contains beginner friendly resources to get help you get started 
-quickly. 
+quickly.** 
 
 ## Retrieval Augmented Generation (RAG)
 
