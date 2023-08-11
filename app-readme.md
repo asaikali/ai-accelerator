@@ -20,7 +20,7 @@ without having to train it on private data.
 
 ### High level architecture 
 
-![High level architecture](./media/RAG-architecture.png)
+![High level architecture](RAG-architecture.png)
 
 
 
