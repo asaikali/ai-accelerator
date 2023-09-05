@@ -34,7 +34,7 @@ public class ChatController
     	
     	request.getMessages()
     	   .stream()
-    	   .forEach(chat -> new ChatMessage(chat.getRole().toUpperCase(), chat.getContent()));    	
+    	   .forEach(chat -> msgs.add(new ChatMessage(chat.getRole().toUpperCase(), chat.getContent())));    	
     	
     	final ChatResponses resp = new ChatResponses();
 		
