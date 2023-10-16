@@ -5,24 +5,28 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.0</version>
+		<version>3.1.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ai-accelerator</artifactId>
+	<artifactId>ai-chat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ai-accelerator</name>
-	<description>Simple AI Application using Azure OpenAPI Service</description>
+	<description>Simple AI Application using Spring AI </description>
 	<properties>
 		<java.version>17</java.version>
-		<springai.version>1.0.0-SNAPSHOT</springai.version>
+		<springai.version>0.2.0-SNAPSHOT</springai.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>

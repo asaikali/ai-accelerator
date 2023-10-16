@@ -1,0 +1,6 @@
+spring:
+  ai:
+    azure:
+      openai:
+        api-key: <AZURE_API_KEY>
+        api-endpoint: <AZURE_API_ENDPOINT>
