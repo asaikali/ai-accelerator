@@ -59,25 +59,25 @@ accelerator:
     #
     # Azure endpoint if azureOpenAI is selected
     # 
-    - name: azureAIEndpoint
-      label: Azure OpenAI Enpoint
-      description: The Azure AI endpoint URL
-      inputType: text
-      dataType: string
-      required: true
-      dependsOn: 
-        name: aiService
-        value: azureOpenAI   
+    # - name: azureAIEndpoint
+    #   label: Azure OpenAI Enpoint
+    #   description: The Azure AI endpoint URL
+    #   inputType: text
+    #   dataType: string
+    #   required: true
+    #   dependsOn: 
+    #     name: aiService
+    #     value: azureOpenAI   
 
     #
     # API Key
     # 
-    - name: apiKey
-      label: "API Key"
-      inputType: text
-      dataType: string
-      display: true
-      required: true
+    # - name: apiKey
+    #   label: "API Key"
+    #   inputType: text
+    #   dataType: string
+    #   display: true
+    #   required: true
 
 engine:
   let:
