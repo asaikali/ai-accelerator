@@ -52,7 +52,7 @@ accelerator:
       defaultValue: "azureOpenAI"
       choices:
         - text: VMware Private AI Foundation 
-        - value: "privateAI"
+          value: "privateAI"
         - text: Azure OpenAI Service
           value: "azureOpenAI"
         - text: Open AI
